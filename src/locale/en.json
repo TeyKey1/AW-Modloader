@@ -1,0 +1,82 @@
+{
+	"appName": "AW Modloader",
+	"ui": {
+		"error": "Error",
+		"cancel": "Cancel",
+		"overwrite": "Overwrite"
+	},
+	"content": {
+		"modActive": "Active",
+		"modName": "Name",
+		"modVersion": "Version",
+		"modAuthor": "Author",
+		"modActions": "Actions",
+		"noModsFound": "No mods found. Add new mods by clicking the Add Mods button in the bottom right corner.",
+		"overwriteModTitle": "Mod already exists",
+		"overwriteMod": "The mod <strong>{modName}</strong> already exists in the registry. Overwrite?"
+	},
+	"footer": {
+		"addMod": "Add Mod",
+		"modSelection": "Select Mod",
+		"help": "Help",
+		"helpText": "This Modloader is used to load mods into AW. To do so, please follow the steps outlined below:\n\n<strong>Download and add mod</strong>\nFirst download an AW mod. The file has to be a zip archive (.zip, .7z) containing the mod files.\nTo add the mod click on the 'Add Mod' Button in the bottom right corner of this application. On success you should now see the added mod in the application view.\n\n<strong>Activate the mod</strong>\nThe newly added mod is not yet active in the game. You need to activate it by clicking the checkbox in the 'Active' column of the application view. Once done, simply restart your game (if it was running during activation) to apply the changes.\n\n<strong>Deactivate the mod</strong>\nYou may also deactivate the mod at any time by clicking the same checkbox. This will not delete the mod entirely and allows you to reactivate it again at any time.\n\n<strong>Delete the mod</strong>\nDeleting the mod will remove it permanently from the application. To do so simply click the trash icon of the mod at the right side of the application view.\n\nFor further help please ask in the ArmoredLabs Forum."
+	},
+	"settings": {
+		"menu": {
+			"advanced": "Advanced",
+			"about": "About",
+			"lightTheme": "Light Theme",
+			"darkTheme": "Dark Theme",
+			"language": "Language"
+		},
+		"language": {
+			"chooseLanguage": "Choose Language",
+			"languages": {
+				"en": "English",
+				"de": "German",
+				"fr": "French",
+				"pl": "Polish",
+				"ru": "Russian"
+			}
+		},
+		"initialConfig": {
+			"languageDialogTitle": "Choose Language",
+			"languageDialogSelect": "Select Language",
+			"configDialogTitle": "Initial Configuration",
+			"configDialogExplanation": "In order to use the AW Modloader please provide the following data (Can later be changed in the advanced settings if necessary):",
+			"configDialogSave": "Apply Settings",
+			"configDialogGameLanguageHint": "Please select the language you are using for AW",
+			"configDialogGameLanguage": "Game Language",
+			"configDialogGamePathHint": "Please select your AW installation folder",
+			"configDialogGamePath": "AW Installation Path"
+		},
+		"advancedConfig": {
+			"configDialogTitle": "Advanced Configuration",
+			"configDialogExplanation": "Any changes to the game language or game path will result in the automatic deactivation of all currently active mods."
+		}
+	},
+	"error": {
+		"fatal": {
+			"dialogTitle": "Fatal Error",
+			"dialogMessage": "Encountered a fatal error:\n\n{error}\n\nThis might be a bug or a configuration/permission issue. If you think this is a bug, please file an issue at {githubIssueUrl} and provide this error and reproduction steps."
+		},
+		"GameLanguageNotSupported": "Selected language is not supported by AW",
+		"invalidGamePath": {
+			"NotExisting": "Provided game folder does not exist. Are you sure that you selected the correct game base folder?",
+			"NotADirectory": "Provided game path is not a folder",
+			"InvalidPath": "Provided game folder is invalid. Are you sure that you selected the correct game base folder?",
+			"InvalidFolderName": "Provided game folder does not match the expected name 'Armored Warfare MyCom'. Are you sure that you selected the correct game base folder?",
+			"LocalizationNotFound": "Provided game folder does not contain the 'localization' folder. Are you sure that you selected the correct game base folder?"
+		},
+		"ArchiveHandling": "Something went wrong while preparing the provided mod archive:\n{error}",
+		"invalidArchive": {
+			"PathNotExisting": "Path to the provided mod archive does not exist",
+			"PathNotFile": "Path to the provided mod archive is not a file",
+			"NoExtension": "File does not have a file extension",
+			"InvalidExtension": "The provided file is not supported in the modloader"
+		},
+		"InvalidModInfo": "A modinfo.json file was found in the mod archive but is invalid:\n{error}\n\nPlease contact the author of the mod.",
+		"ModConflict": "This mod conflicts with the following other active mods:\n\n{conflicts}\nPlease deactivate the conflicting mods before activating this mod.",
+		"ModVersionMismatch": "A newer or identical version of this mod is already installed.\n\nCurrently installed version: {installedVersion}\nNew version: {newVersion}"
+	}
+}

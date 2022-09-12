@@ -1,0 +1,7 @@
+{
+	"name": "Mod name",
+	"author": "Mod Author",
+	"version": "0.1.0",
+	"injection": "localization / direct",
+	"info": "This is an awesome mod info\nIt contains all the best tank colors"
+}

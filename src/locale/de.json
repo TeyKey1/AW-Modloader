@@ -1,0 +1,82 @@
+{
+	"appName": "AW Modloader",
+	"ui": {
+		"error": "Fehler",
+		"cancel": "Abbrechen",
+		"overwrite": "Überschreiben"
+	},
+	"content": {
+		"modActive": "Aktiv",
+		"modName": "Name",
+		"modVersion": "Version",
+		"modAuthor": "Author",
+		"modActions": "Aktionen",
+		"noModsFound": "Keine Mods gefunden. Füge über den Button unten rechts neue Mods hinzu.",
+		"overwriteModTitle": "Mod ist bereits installiert",
+		"overwriteMod": "Der Mod <strong>{modName}</strong> wurde bereits hinzugefügt. Bestehenden Mod überschreiben?"
+	},
+	"footer": {
+		"addMod": "Mod Hinzufügen",
+		"modSelection": "Modauswahl",
+		"help": "Hilfe",
+		"helpText": "Dieser Modloader lädt Modifikationen in AW. Um eine Modifikation in das Spiel zu laden befolge folgende Schritte:\n\n<strong>Mod herunterladen und hinzufügen</strong>\nLade dir zuerst einen Mod deiner Wahl herunter. Das Mod-File muss dabei ein zip-Archiv (.zip, .7z) sein und die mod files enthalten.\nUm den heruntergeladenen Mod hinzuzufügen, klicke auf den 'Mod Hinzufügen' Button in der unteren rechten Ecke dieser Applikation. Nach erfolgreichem hinzufügen des Mods solltest du diesen nun in der Mod Liste der Applikation sehen können.\n\n<strong>Mod aktivieren</strong>\nDer neu hinzugefügte Mod ist noch nicht im Spiel aktiv. Dafür musst du diesen zuerst aktivieren indem du die Checkbox in der 'Aktiv' Spalte der Applikation anklickst. Danach musst du dein Spiel neu starten (falls es während dem Aktivieren gelaufen ist) um die Änderungen des Mods im Spiel zu aktivieren\n\n<strong>Mod deaktivieren</strong>\nDu kannst den Mod auch jederzeit deaktivieren indem du dieselbe Checkbox nochmals anklickst. Dies entfernt den Mod aus dem Spiel aber löscht diesen nicht aus der Applikation. Du kannst diesen Mod somit jederzeit wieder aktivieren.\n\n<strong>Mod löschen</strong>\nUm einen Mod permanent zu löschen, klicke auf das Abfallcontainer-Symbol des Mods auf der rechten Seite der Applikation.\n\nBei Unklarheiten und für weitere Hilfe frag bitte im ArmoredLabs Forum nach."
+	},
+	"settings": {
+		"menu": {
+			"advanced": "Erweitert",
+			"about": "Info",
+			"lightTheme": "Helles Theme",
+			"darkTheme": "Dunkles Theme",
+			"language": "Sprache"
+		},
+		"language": {
+			"chooseLanguage": "Sprachauswahl",
+			"languages": {
+				"en": "Englisch",
+				"de": "Deutsch",
+				"fr": "Französisch",
+				"pl": "Polnisch",
+				"ru": "Russisch"
+			}
+		},
+		"initialConfig": {
+			"languageDialogTitle": "Sprachauswahl",
+			"languageDialogSelect": "Sprache Auswählen",
+			"configDialogTitle": "Fertigstellung der Installation",
+			"configDialogExplanation": "Bitte stelle folgende Daten zur verfügung, bevor du den AW Modloader verwenden kannst (Diese Daten können später unter den erweiterten Einstellungen falls nötig angepasst werden):",
+			"configDialogSave": "Einstellungen Speichern",
+			"configDialogGameLanguageHint": "Bitte wähle die Sprache mit welcher du AW spielst",
+			"configDialogGameLanguage": "Sprache des Spiels",
+			"configDialogGamePathHint": "Bitte wähle deinen AW Installationsordner",
+			"configDialogGamePath": "AW Installationsordner"
+		},
+		"advancedConfig": {
+			"configDialogTitle": "Erweiterte Einstellungen",
+			"configDialogExplanation": "Jede Änderung der Spielsprache oder des Installationsordners führt zur deaktivierung aller aktiver Mods."
+		}
+	},
+	"error": {
+		"fatal": {
+			"dialogTitle": "Kritischer Fehler",
+			"dialogMessage": "Beim Ausführen der Applikation wurde ein kritischer Fehler festgestellt:\n\n{error}\n\nDies könnte ein Bug oder ein Konfigurations und Berechtigungsproblem sein. Falls du denkst dass es sich dabei um einen Bug handelt öffne bitte ein Issue auf GitHub {githubIssueUrl} und füge diese Nachricht mit etwaigen Schritten zur Reproduktion dieses Fehlers an."
+		},
+		"GameLanguageNotSupported": "Die gewählte Sprache ist in AW nicht unterstützt",
+		"invalidGamePath": {
+			"NotExisting": "Der angegebene Ordner existiert nicht. Bist du sicher dass du den korrekten AW Spielordner ausgewählt hast?",
+			"NotADirectory": "Der angegeben Spielordner ist kein Ordner",
+			"InvalidPath": "Der angegebene Pfad ist ungültig. Bist du sicher dass du den korrekten AW Spielordner ausgewählt hast?",
+			"InvalidFolderName": "Der angegebene Ordner hat einen unbekannten Namen. Der erwartete Name des Spielordners ist 'Armored Warfare MyCom'. Bist du sicher dass du den korrekten AW Spielordner ausgewählt hast?",
+			"LocalizationNotFound": "Der angegebene Ordner enthält nicht einen 'localization' Ordner. Bist du sicher dass du den korrekten AW Spielordner ausgewählt hast?"
+		},
+		"ArchiveHandling": "Während dem bearbeiten des Mod-Archives ist ein Fehler aufgetreten:\n{error}",
+		"invalidArchive": {
+			"PathNotExisting": "Der angegeben Pfad zum Mod-Archiv existiert nicht",
+			"PathNotFile": "Der angegebene Mod-Archiv-Pfad ist keine Datei",
+			"NoExtension": "Die angegebene Datei hat keinen Dateitypen",
+			"InvalidExtension": "Die angegebene Datei wird nicht unterstützt"
+		},
+		"InvalidModInfo": "Im Mod-Archiv wurde eine modinfo.json Datei gefunden. Diese ist jedoch fehlerhaft:\n{error}\n\nBitte kontaktiere den Autor dieses Mods.",
+		"ModConflict": "Dieser Mod hat eine Überschneidung mit den folgenden aktiven Mods:\n\n{conflicts}\nBitte deaktiviere die aufgelisteten Mods bevor du diesen Mod aktivierst.",
+		"ModVersionMismatch": "Eine neuere oder identische Version dieses Mods ist bereits installiert.\n\nInstallierte Version: {installedVersion}\nNeue Version: {newVersion}"
+	}
+}

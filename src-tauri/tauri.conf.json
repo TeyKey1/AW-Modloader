@@ -1,0 +1,88 @@
+{
+	"$schema": "../node_modules/@tauri-apps/cli/schema.json",
+	"build": {
+		"beforeDevCommand": "npm run dev",
+		"beforeBuildCommand": "npm run build",
+		"devPath": "http://localhost:5173",
+		"distDir": "../build"
+	},
+	"package": {
+		"productName": "aw-modloader",
+		"version": "0.1.0"
+	},
+	"tauri": {
+		"allowlist": {
+			"all": false,
+			"dialog": {
+				"open": true,
+				"message": true
+			},
+			"shell": {
+				"open": true
+			},
+			"process": {
+				"exit": true
+			}
+		},
+		"bundle": {
+			"active": true,
+			"category": "Utility",
+			"copyright": "",
+			"deb": {
+				"depends": []
+			},
+			"externalBin": [],
+			"icon": [
+				"icons/32x32.png",
+				"icons/128x128.png",
+				"icons/128x128@2x.png",
+				"icons/icon.icns",
+				"icons/icon.ico"
+			],
+			"identifier": "com.teykey.awmodloader",
+			"longDescription": "",
+			"macOS": {
+				"entitlements": null,
+				"exceptionDomain": "",
+				"frameworks": [],
+				"providerShortName": null,
+				"signingIdentity": null
+			},
+			"resources": [],
+			"shortDescription": "",
+			"targets": "all",
+			"windows": {
+				"certificateThumbprint": null,
+				"digestAlgorithm": "sha256",
+				"timestampUrl": "",
+				"webviewInstallMode": {
+					"type": "embedBootstrapper"
+				},
+				"wix": {
+					"language": [
+						"en-US",
+						"de-DE",
+						"fr-FR",
+						"ru-RU",
+						"pl-PL"
+					]
+				}
+			}
+		},
+		"security": {
+			"csp": null
+		},
+		"updater": {
+			"active": false
+		},
+		"windows": [
+			{
+				"fullscreen": false,
+				"height": 600,
+				"resizable": true,
+				"title": "AW Modloader",
+				"width": 800
+			}
+		]
+	}
+}
