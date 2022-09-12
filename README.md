@@ -12,9 +12,10 @@ This program allows to manage mods in AW. Currently only injection by using the 
 - Collision detection of mods
 
 **Now that's neat! How do I get this?**
+
 As a user, simply download the program [here](https://github.com/TeyKey1). (Only Windows 7-11 are supported. It has only been tested on windows 10 though)
 
-## Mod Autors
+## Mod Authors
 
 In order to make your mod compatible with this modloader you have to follow the specified file structure in your archives.
 Please note that currently only mods that work with the localization injection technique are supported.
@@ -22,21 +23,26 @@ Please note that currently only mods that work with the localization injection t
 **Required mod archive file structure**
 (Allowed archive type is zip and 7z. if you use another I might be able to support it, please file an issue)
 
+```
 MyFancyMod.zip =>
-sounds/
-weapons/
-...
-weapons/
-...
+  sounds/
+    weapons/
+    ...
+  weapons/
+  ...
+```
 
+```
 ThisIsWrong.zip =>
-localization/
-Language/
-...
+  localization/
+    <language>/
+      ...
+```
 
 Generally the archive needs to represent the folder structure that is required inside the `localization/<language>/` folder.
 
 **modinfo.json**
+
 In order to attach more information to your mod that the modloader can use you can create a `modinfo.json` file. Using this file you can achieve proper version control of your mod in the modloader. The file needs to have the following JSON data:
 
 ```JSON
@@ -57,15 +63,17 @@ Parameters:
 - **injection** Currently only "localization" is supported, so leave as is
 - **info** Some info text about your mod. Can be multiline using escape characters
 
-The ``modinfo.json` file needs to reside in the base of the mod archive:
+The `modinfo.json` file needs to reside in the base of the mod archive:
 
+```
 MyFancyMod.zip =>
-sounds/
-weapons/
-...
-weapons/
-...
-modinfo.json
+  sounds/
+    weapons/
+    ...
+  weapons/
+  ...
+  modinfo.json
+```
 
 ## Other
 The author of this application does not endorse the use of it for any use-case that violates the [agreement about modding AW](https://armoredlabs.net/index.php?/topic/166-modding-aw-a-statement-caveats/) and is not affiliated with Armored Warfare in any way.
