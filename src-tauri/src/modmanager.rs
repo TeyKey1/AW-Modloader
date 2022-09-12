@@ -135,6 +135,11 @@ pub enum InvalidArchive {
     InvalidExtension,
 }
 
+#[derive(Debug, Serialize, Deserialize)]
+struct OverwriteEventPayload {
+    overwrite: bool,
+}
+
 pub struct ModManager;
 
 impl ModManager {
@@ -260,13 +265,12 @@ impl ModManager {
                     // ask user for overwrite permission
                     let (oneshot_sender, oneshot_receiver) = oneshot::channel();
                     window.once("add-mod-overwrite", |event| {
-                        println!("event payload:  {:?}", event.payload());
-                        let overwrite = serde_json::from_str::<bool>(event.payload().expect(
+                        let overwrite: OverwriteEventPayload = serde_json::from_str(event.payload().expect(
                             "Received None as event payload but expected payload to contain value",
                         ))
-                        .expect("Expected bool but failed to deserialize");
+                        .expect("Expected OverwriteEventPayload but failed to deserialize");
 
-                        oneshot_sender.send(overwrite).expect(
+                        oneshot_sender.send(overwrite.overwrite).expect(
                             "Oneshot receiver has been dropped before sender could send the value",
                         );
                     });
