@@ -13,7 +13,7 @@ This program allows to manage mods in AW. Currently only injection by using the 
 
 **Now that's neat! How do I get this?**
 
-As a user, simply download the program [here](https://github.com/TeyKey1). (Only Windows 7-11 are supported. It has only been tested on windows 10 though)
+As a user, simply download the program [here](https://github.com/TeyKey1/AW-Modloader/releases). (Only Windows 7-11 are supported. It has only been tested on windows 10 though)
 
 ## Mod Authors
 
