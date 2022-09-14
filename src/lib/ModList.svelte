@@ -8,6 +8,7 @@
 	import Checkbox from "@smui/checkbox";
 	import Dialog, { Title, Content } from "@smui/dialog";
 	import Card from "@smui/card";
+	import LinearProgress from "@smui/linear-progress";
 
 	// Components
 	import ErrorDialog from "$lib/ErrorDialog.svelte";
@@ -17,6 +18,9 @@
 
 	let showErrorMessage = false;
 	let errorMessage = "";
+
+	let dataAvailable = true;
+	let loadingUid: null | number = null;
 
 	let showModInfoDialog = false;
 	let modInfoDialogContent = "";
@@ -35,15 +39,22 @@
 	}
 
 	async function deleteMod(uid: number) {
+		dataAvailable = false;
+		loadingUid = uid;
 		const result = await invokeBackend("delete_mod", { uid });
 
 		if (isError(result)) {
 			errorMessage = getErrorMessage(result);
 			showErrorMessage = true;
 		}
+
+		dataAvailable = true;
+		loadingUid = null;
 	}
 
 	async function activate_mod(uid: number) {
+		dataAvailable = false;
+		loadingUid = uid;
 		const result = await invokeBackend("activate_mod", { uid });
 
 		if (isError(result)) {
@@ -62,9 +73,13 @@
 			errorMessage = getErrorMessage(result);
 			showErrorMessage = true;
 		}
+		dataAvailable = true;
+		loadingUid = null;
 	}
 
 	async function deactivate_mod(uid: number) {
+		dataAvailable = false;
+		loadingUid = uid;
 		const result = await invokeBackend("deactivate_mod", { uid });
 
 		if (isError(result)) {
@@ -83,6 +98,8 @@
 			errorMessage = getErrorMessage(result);
 			showErrorMessage = true;
 		}
+		dataAvailable = true;
+		loadingUid = null;
 	}
 </script>
 
@@ -98,7 +115,7 @@
 	</Head>
 	<Body>
 		{#each mods as mod (mod.uid)}
-			<Row>
+			<Row disabled={mod.uid === loadingUid}>
 				<Cell checkbox
 					><Checkbox
 						bind:checked={mod.is_active}
@@ -115,28 +132,34 @@
 				<Cell>{mod.version ? mod.version : "n/a"}</Cell>
 				<Cell>{mod.author ? mod.author : "n/a"}</Cell>
 				<Cell checkbox>
-					<IconButton
-						style="float: right;"
-						size="mini"
-						class="material-icons"
-						id="deleteMod"
-						aria-label="Delete Mod"
-						on:click={() => deleteMod(mod.uid)}>delete</IconButton
-					>
-					{#if mod.info}
+					<div style="display: flex; flex-direction: row; justify-content: right;">
+						{#if mod.info}
+							<IconButton
+								size="mini"
+								class="material-icons"
+								id="infoMod"
+								aria-label="Mod info"
+								on:click={() => showModInfo(mod.uid)}>info</IconButton
+							>
+						{/if}
 						<IconButton
-							style=""
 							size="mini"
 							class="material-icons"
-							id="infoMod"
-							aria-label="Mod info"
-							on:click={() => showModInfo(mod.uid)}>info</IconButton
+							id="deleteMod"
+							aria-label="Delete Mod"
+							on:click={() => deleteMod(mod.uid)}>delete</IconButton
 						>
-					{/if}
+					</div>
 				</Cell>
 			</Row>
 		{/each}
 	</Body>
+	<LinearProgress
+		class="dataTableProgress"
+		indeterminate
+		bind:closed={dataAvailable}
+		slot="progress"
+	/>
 </DataTable>
 
 {#if mods.length === 0}
