@@ -76,4 +76,5 @@ MyFancyMod.zip =>
 ```
 
 ## Other
+
 The author of this application does not endorse the use of it for any use-case that violates the [agreement about modding AW](https://armoredlabs.net/index.php?/topic/166-modding-aw-a-statement-caveats/) and is not affiliated with Armored Warfare in any way.

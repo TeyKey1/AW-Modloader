@@ -11,7 +11,7 @@
 	export let message: string;
 </script>
 
-<Dialog bind:open>
+<Dialog bind:open scrimClickAction="" escapeKeyAction="">
 	<!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
 	<Title class="errorDialogTitle">Error</Title>
 	<Content style="white-space: pre-wrap;">{message}</Content>

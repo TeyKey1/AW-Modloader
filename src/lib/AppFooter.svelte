@@ -11,6 +11,7 @@
 	import Button, { Icon, Label } from "@smui/button";
 	import Dialog, { Title, Content, Actions, Header } from "@smui/dialog";
 	import IconButton from "@smui/icon-button";
+	import CircularProgress from "@smui/circular-progress";
 
 	// Components
 	import ErrorDialog from "$lib/ErrorDialog.svelte";
@@ -21,7 +22,10 @@
 
 	let showHelp = false;
 
+	let addModLoading = false;
+
 	async function addMod() {
+		addModLoading = true;
 		let selectedFiles = await open({
 			directory: false,
 			multiple: true,
@@ -35,6 +39,7 @@
 		});
 
 		if (!selectedFiles) {
+			addModLoading = false;
 			return;
 		}
 
@@ -48,6 +53,8 @@
 			errorMessage = getErrorMessage(result);
 			showErrorMessage = true;
 		}
+
+		addModLoading = false;
 	}
 
 	let unlistenOverwrite: null | UnlistenFn = null;
@@ -87,9 +94,18 @@
 		<Icon class="material-icons">help_center</Icon>
 		<Label>{$_("footer.help")}</Label>
 	</Button>
-	<Button style="float: right; margin-right: 10px" color="primary" on:click={addMod}>
-		<Icon class="material-icons">add</Icon>
-		<Label>{$_("footer.addMod")}</Label>
+	<Button
+		style="float: right; margin-right: 10px"
+		color="primary"
+		on:click={addMod}
+		disabled={addModLoading}
+	>
+		{#if !addModLoading}
+			<Icon class="material-icons">add</Icon>
+			<Label>{$_("footer.addMod")}</Label>
+		{:else}
+			<CircularProgress style="height: 28px; width: 28px;" indeterminate />
+		{/if}
 	</Button>
 
 	<ErrorDialog bind:open={showErrorMessage} message={errorMessage} />
