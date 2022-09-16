@@ -10,7 +10,7 @@ import { get } from "svelte/store";
 
 export type AppError = {
 	Recoverable?: RecoverableAppError;
-	Unrecoverable?: { msg: string; };
+	Unrecoverable?: { msg: string };
 };
 export type RecoverableAppError = {
 	ConfigError?: ConfigError;
@@ -18,39 +18,39 @@ export type RecoverableAppError = {
 };
 
 export type ConfigError =
-	| { type: "DeSerialization"; msg: string; }
-	| { type: "Io"; msg: string; }
-	| { type: "GameLanguageNotSupported"; }
-	| ({ type: "InvalidGamePath"; } & InvalidGamePath);
+	| { type: "DeSerialization"; msg: string }
+	| { type: "Io"; msg: string }
+	| { type: "GameLanguageNotSupported" }
+	| ({ type: "InvalidGamePath" } & InvalidGamePath);
 
 export type InvalidGamePath =
-	| { invalidGamePath: "NotExisting"; }
-	| { invalidGamePath: "NotADirectory"; }
-	| { invalidGamePath: "InvalidPath"; }
-	| { invalidGamePath: "InvalidFolderName"; }
-	| { invalidGamePath: "LocalizationNotFound"; };
+	| { invalidGamePath: "NotExisting" }
+	| { invalidGamePath: "NotADirectory" }
+	| { invalidGamePath: "InvalidPath" }
+	| { invalidGamePath: "InvalidFolderName" }
+	| { invalidGamePath: "LocalizationNotFound" };
 
 export type ModManagerError =
-	| { type: "Io"; msg: string; }
-	| { type: "Db"; msg: string; }
-	| { type: "DeSerialization"; msg: string; }
-	| ({ type: "InvalidArchive"; } & InvalidArchive)
-	| { type: "ArchiveHandling"; msg: string; }
-	| { type: "InvalidModInfo"; msg: string; }
-	| { type: "ModNotExisting"; }
-	| { type: "ModAlreadyActive"; }
-	| { type: "ModAlreadyDeactivated"; }
-	| { type: "ModVersionMismatch"; mismatch: [string, string]; }
-	| { type: "AppNotInitialized"; }
-	| { type: "ModConflict"; conflict: Array<[string, string]>; }
-	| ({ type: "ConfigError"; } & ConfigError)
-	| { type: "TauriError"; msg: string; };
+	| { type: "Io"; msg: string }
+	| { type: "Db"; msg: string }
+	| { type: "DeSerialization"; msg: string }
+	| ({ type: "InvalidArchive" } & InvalidArchive)
+	| { type: "ArchiveHandling"; msg: string }
+	| { type: "InvalidModInfo"; msg: string }
+	| { type: "ModNotExisting" }
+	| { type: "ModAlreadyActive" }
+	| { type: "ModAlreadyDeactivated" }
+	| { type: "ModVersionMismatch"; mismatch: [string, string] }
+	| { type: "AppNotInitialized" }
+	| { type: "ModConflict"; conflict: Array<[string, string]> }
+	| ({ type: "ConfigError" } & ConfigError)
+	| { type: "TauriError"; msg: string };
 
 export type InvalidArchive =
-	| { invalidArchive: "PathNotExisting"; }
-	| { invalidArchive: "PathNotFile"; }
-	| { invalidArchive: "NoExtension"; }
-	| { invalidArchive: "InvalidExtension"; };
+	| { invalidArchive: "PathNotExisting" }
+	| { invalidArchive: "PathNotFile" }
+	| { invalidArchive: "NoExtension" }
+	| { invalidArchive: "InvalidExtension" };
 
 /**
  * Invoke a command in the backend. This automatically handles unrecoverable app errors and forwards recoverable app errors. See the error.rs file in the backend code for more info.

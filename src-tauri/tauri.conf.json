@@ -59,13 +59,7 @@
 					"type": "embedBootstrapper"
 				},
 				"wix": {
-					"language": [
-						"en-US",
-						"de-DE",
-						"fr-FR",
-						"ru-RU",
-						"pl-PL"
-					]
+					"language": ["en-US", "de-DE", "fr-FR", "ru-RU", "pl-PL"]
 				}
 			}
 		},

@@ -150,9 +150,9 @@
 	</Content>
 	<Actions>
 		{#if !initialConfig}
-		<Button class="errorButton" on:click={() => (open = false)}>
-			<Label>{$_("ui.cancel")}</Label>
-		</Button>
+			<Button class="errorButton" on:click={() => (open = false)}>
+				<Label>{$_("ui.cancel")}</Label>
+			</Button>
 		{/if}
 		<Button class="successButton" on:click={applySettings}>
 			<Label>{$_("settings.initialConfig.configDialogSave")}</Label>
