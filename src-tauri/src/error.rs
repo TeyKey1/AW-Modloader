@@ -2,7 +2,8 @@ use serde::{Deserialize, Serialize};
 use sled::Error as SledError;
 use ts_rs::TS;
 
-use crate::{config::ConfigError, modmanager::ModManagerError};
+use crate::config::ConfigError;
+use crate::modmanager::error::ModManagerError;
 
 /// The global error type of this application.
 ///
@@ -37,6 +38,7 @@ impl From<ConfigError> for AppError {
             ConfigError::Io { msg } => Self::Unrecoverable { msg },
             ConfigError::GameLanguageNotSupported => Self::Recoverable(error.into()),
             ConfigError::InvalidGamePath(_) => Self::Recoverable(error.into()),
+            ConfigError::TauriError { msg } => Self::Unrecoverable { msg },
         }
     }
 }

@@ -35,7 +35,7 @@ pub trait BincodeTransactional {
     where
         T: Serialize + DeserializeOwned;
 
-    fn b_remove<'de, T>(&self, key: &Key<T>) -> Result<Option<T>, UnabortableTransactionError>
+    fn b_remove<T>(&self, key: &Key<T>) -> Result<Option<T>, UnabortableTransactionError>
     where
         T: Serialize + DeserializeOwned;
 }
