@@ -2,11 +2,11 @@ use std::path::Path;
 
 use sled::{Config, Db, Mode, Tree};
 
-mod db;
+mod database;
 mod keys;
 
-pub use db::BincodeDb;
-pub use db::BincodeTransactional;
+pub use database::BincodeDb;
+pub use database::BincodeTransactional;
 pub use keys::Key;
 
 /// The App Database
@@ -46,14 +46,12 @@ impl AppDb {
     pub fn get_inner(&self) -> &Db {
         &self.inner
     }
-}
 
-impl Drop for AppDb {
-    /// Flushes the remaining buffers and makes them persistent on the disk before dropping the DB.
+    /// Flushes the remaining buffers and makes them persistent on the disk
     ///
     /// # Panics
     /// If the flushing of the buffers fails.
-    fn drop(&mut self) {
+    pub fn flush(&self) {
         log::debug!("Flushing DB to disk prior to shutdown");
         self.inner
             .flush()

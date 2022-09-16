@@ -38,6 +38,7 @@ pub enum ConfigError {
     Io { msg: String },
     GameLanguageNotSupported,
     InvalidGamePath(InvalidGamePath),
+    TauriError { msg: String },
 }
 
 /// The various ways a provided AW game path can be invalid
@@ -76,9 +77,17 @@ impl From<std::io::Error> for ConfigError {
     }
 }
 
+impl From<tauri::Error> for ConfigError {
+    fn from(error: tauri::Error) -> Self {
+        Self::TauriError {
+            msg: error.to_string(),
+        }
+    }
+}
+
 type Result<T> = std::result::Result<T, ConfigError>;
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Serialize, Deserialize, Clone)]
 pub struct ModloaderConfig {
     app_language: Option<String>,
     game_path: Option<String>,
@@ -88,38 +97,41 @@ pub struct ModloaderConfig {
 
 impl ModloaderConfig {
     /// Loads an existing configuration file or creates a new default one, if not existing
-    pub fn load_config() -> Result<Self> {
+    pub async fn load_config() -> Result<Self> {
         let config_path = APP_SAVE_PATH.join(CONFIG_FILE_NAME);
 
-        if !config_path.exists() {
-            log::info!("Could not find existing config.json file, creating a new one.");
-            let new_config = Self::default();
+        tauri::async_runtime::spawn_blocking::<_, Result<Self>>(|| {
+            if !config_path.exists() {
+                log::info!("Could not find existing config.json file, creating a new one.");
+                let new_config = Self::default();
 
-            let config_file = OpenOptions::new()
-                .write(true)
-                .create(true)
-                .open(config_path)?;
+                let config_file = OpenOptions::new()
+                    .write(true)
+                    .create(true)
+                    .open(config_path)?;
 
-            serde_json::to_writer_pretty(&config_file, &new_config)?;
+                serde_json::to_writer_pretty(&config_file, &new_config)?;
 
-            Ok(new_config)
-        } else {
-            let config_file = OpenOptions::new().read(true).open(config_path)?;
+                Ok(new_config)
+            } else {
+                let config_file = OpenOptions::new().read(true).open(config_path)?;
 
-            let config = serde_json::from_reader::<_, Self>(&config_file)?;
+                let config = serde_json::from_reader::<_, Self>(&config_file)?;
 
-            Ok(config)
-        }
+                Ok(config)
+            }
+        })
+        .await?
     }
 
-    pub fn set_advanced_config(
+    pub async fn set_advanced_config(
         &mut self,
         game_lang: String,
         game_path_string: String,
     ) -> Result<()> {
-        self.set_game_path(game_path_string)?;
+        self.set_game_path(game_path_string).await?;
 
-        self.set_game_language(game_lang)?;
+        self.set_game_language(game_lang).await?;
 
         Ok(())
     }
@@ -128,18 +140,18 @@ impl ModloaderConfig {
         self.app_language.clone()
     }
 
-    pub fn set_app_language(&mut self, lang: Option<String>) -> Result<()> {
+    pub async fn set_app_language(&mut self, lang: Option<String>) -> Result<()> {
         self.app_language = lang;
-        self.save_config()?;
+        self.save_config().await?;
 
         Ok(())
     }
 
     pub fn get_game_path(&self) -> Option<PathBuf> {
-        self.game_path.as_ref().map(|path| PathBuf::from(path))
+        self.game_path.as_ref().map(PathBuf::from)
     }
 
-    pub fn set_game_path(&mut self, game_path_string: String) -> Result<()> {
+    pub async fn set_game_path(&mut self, game_path_string: String) -> Result<()> {
         // Check if provided game path is a valid AW game
         let game_path = dunce::canonicalize(&game_path_string)?;
 
@@ -167,7 +179,7 @@ impl ModloaderConfig {
         }
 
         self.game_path = Some(game_path_string);
-        self.save_config()?;
+        self.save_config().await?;
 
         Ok(())
     }
@@ -176,7 +188,7 @@ impl ModloaderConfig {
         self.game_language.clone()
     }
 
-    pub fn set_game_language(&mut self, game_lang: String) -> Result<()> {
+    pub async fn set_game_language(&mut self, game_lang: String) -> Result<()> {
         self.game_language = Some(match game_lang.as_str() {
             "en" => Ok("English".to_owned()),
             "de" => Ok("German".to_owned()),
@@ -186,7 +198,7 @@ impl ModloaderConfig {
             _ => Err(ConfigError::GameLanguageNotSupported),
         }?);
 
-        self.save_config()?;
+        self.save_config().await?;
 
         Ok(())
     }
@@ -195,23 +207,27 @@ impl ModloaderConfig {
         self.dark_theme
     }
 
-    pub fn set_dark_theme(&mut self, dark: bool) -> Result<()> {
+    pub async fn set_dark_theme(&mut self, dark: bool) -> Result<()> {
         self.dark_theme = dark;
-        self.save_config()?;
+        self.save_config().await?;
 
         Ok(())
     }
 
-    fn save_config(&self) -> Result<()> {
+    async fn save_config(&self) -> Result<()> {
         let config_path = APP_SAVE_PATH.join(CONFIG_FILE_NAME);
 
-        let mut config_file = OpenOptions::new()
-            .write(true)
-            .truncate(true)
-            .open(config_path)?;
+        let config_clone = self.clone();
+        tauri::async_runtime::spawn_blocking::<_, Result<()>>(move || {
+            let mut config_file = OpenOptions::new()
+                .write(true)
+                .truncate(true)
+                .open(config_path)?;
 
-        serde_json::to_writer_pretty(&mut config_file, self)?;
+            serde_json::to_writer_pretty(&mut config_file, &config_clone)?;
 
-        Ok(())
+            Ok(())
+        })
+        .await?
     }
 }
