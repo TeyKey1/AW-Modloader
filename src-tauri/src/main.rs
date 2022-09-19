@@ -2,7 +2,8 @@
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
-use std::{collections::HashMap, fs::File, sync::Arc};
+use std::collections::HashMap;
+use std::fs::File;
 
 use lazy_static::lazy_static;
 use modmanager::{ModChangedEvent, ModManager};
@@ -73,13 +74,10 @@ fn main() {
             ])
             .expect("Failed to create logger");
 
-            let db = app.state::<Arc<AppDb>>();
-            let db = db.inner().clone();
-
             let main_window = app.get_window("main").unwrap();
 
             tauri::async_runtime::spawn(async move {
-                let mod_tree = db.open_tree(modmanager::DB_MOD_TREE_NAME);
+                let mod_tree = DB.open_tree(modmanager::DB_MOD_TREE_NAME);
 
                 let mut mod_tree_subscriber = mod_tree.watch_prefix(vec![]);
 
