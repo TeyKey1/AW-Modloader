@@ -35,7 +35,7 @@
 		"@smui/snackbar": "^6.1.0",
 		"@smui/textfield": "^6.1.0",
 		"@smui/top-app-bar": "^6.1.0",
-		"@sveltejs/adapter-static": "^1.0.0-next.42",
+		"@sveltejs/adapter-static": "^1.0.0-next.43",
 		"@sveltejs/kit": "next",
 		"@tauri-apps/cli": "^1.1.0",
 		"@typescript-eslint/eslint-plugin": "^5.37.0",
