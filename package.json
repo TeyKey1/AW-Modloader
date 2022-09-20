@@ -37,7 +37,7 @@
 		"@smui/top-app-bar": "^6.1.0",
 		"@sveltejs/adapter-static": "^1.0.0-next.42",
 		"@sveltejs/kit": "next",
-		"@tauri-apps/cli": "^1.1.0",
+		"@tauri-apps/cli": "^1.1.1",
 		"@typescript-eslint/eslint-plugin": "^5.37.0",
 		"@typescript-eslint/parser": "^5.37.0",
 		"eslint": "^8.23.1",
