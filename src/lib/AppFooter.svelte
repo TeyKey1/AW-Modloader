@@ -139,7 +139,7 @@
 		<Content style="white-space: pre-wrap;"><span>{@html $_("footer.helpText")}</span></Content>
 		<Actions>
 			<Button class="infoButton" on:click={() => openBrowser(FORUM_HELP)}>
-				<Label>Ask in Forum</Label>
+				<Label>{$_("footer.helpAsk")}</Label>
 			</Button>
 		</Actions>
 	</Dialog>

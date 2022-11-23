@@ -6,3 +6,7 @@
 ### Enhancements:
 - Add UI loading indications for all operations
 - All blocking operations are now happening in blocking threads. This leads to a responsive UI even during demanding workloads.
+
+### Other:
+- Fix missing "ask in forum" button translation
+- updated various dependencies to the newest available version
