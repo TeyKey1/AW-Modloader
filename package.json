@@ -20,7 +20,7 @@
 		"@material/snackbar": "^14.0.0",
 		"@material/theme": "^14.0.0",
 		"@material/typography": "^14.0.0",
-		"@smui/button": "^6.1.0",
+		"@smui/button": "^6.1.4",
 		"@smui/card": "^6.1.0",
 		"@smui/checkbox": "^6.1.0",
 		"@smui/circular-progress": "^6.1.0",
