@@ -28,7 +28,7 @@
 		"@smui/dialog": "^6.1.0",
 		"@smui/icon-button": "^6.1.0",
 		"@smui/linear-progress": "^6.1.0",
-		"@smui/list": "^6.1.0",
+		"@smui/list": "^6.1.4",
 		"@smui/menu": "^6.1.0",
 		"@smui/radio": "^6.1.0",
 		"@smui/select": "^6.1.0",
